@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-recurly",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Ember-cli addon for using Recurly.js",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,7 +11,10 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url":"git+https://github.com/gnazarkin/ember-cli-recurly.git"
+  },
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -38,10 +41,20 @@
     "ember-try": "~0.0.8"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "recurly.js",
+    "recurly"
+  ],
+  "homepage": "https://github.com/gnazarkin/ember-cli-recurly",
+  "maintainers": [
+    {
+      "name": "gnazarkin",
+      "email": "gleb.nazarkin@gmail.com"
+    }
   ],
   "dependencies": {
-    "ember-cli-babel": "^5.1.5"
+    "ember-cli-babel": "^5.1.5",
+    "ember-inject-script": "0.0.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
