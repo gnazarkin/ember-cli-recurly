@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-recurly",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Ember-cli addon for using Recurly.js",
   "directories": {
     "doc": "doc",

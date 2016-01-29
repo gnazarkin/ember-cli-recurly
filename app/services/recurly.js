@@ -17,9 +17,5 @@ export default (Ember.Service || Ember.Object).extend({
         }
       });
     });
-  },
-
-  currency: config.recurly.currency || "USD",
-  taxCode: config.recurly.taxCode || "",
-  vatNumber: config.recurly.vatNumbe || "",
+  }
 });
