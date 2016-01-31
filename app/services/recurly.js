@@ -17,5 +17,21 @@ export default (Ember.Service || Ember.Object).extend({
         }
       });
     });
+  },
+
+  getBankInfo: function(routingNumber) {
+    let lookupData = {
+      routingNumber: routingNumber.toString()
+    }
+
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      recurly.bankAccount.bankInfo(lookupData, function(err, bankInfo) {
+        if(err) {
+          reject(err);
+        } else {
+          resolve(bankInfo)
+        }
+      });
+    });
   }
 });

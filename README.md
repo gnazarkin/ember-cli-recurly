@@ -27,10 +27,10 @@ Inject the service where needed.
 recurly: Ember.inject.service()
 ```
 #### recurly
-Service injection gives access to a global object _recurly_. Can Also be used to obtain a token using the service.
+Service injection gives access to a global object `recurly`. Can Also be used to obtain a token using the service.
 
 #### getToken()
-`getToken()` gets user location from the browser and writes its coordinates to `token` property on the service. Accepts __billingInfo__ as an argument. Returns an __Ember.RSVP.Promise__ which is either resolved with __token__ containing all data about user location or is rejected with __err__ which explains why token request failed.
+`getToken()` gets user location from the browser and writes its coordinates to `token` property on the service. Accepts __billingInfo__ as an argument. Returns an __Ember.RSVP.Promise__ which is either resolved with __token__ containing token object or with __err__ which explains why token request failed.
 It is used like this:
 ```
 var billingInfo = {
@@ -66,12 +66,29 @@ The object is also held in the service and can be retrieved like so:
 let token = this.get('recurly.token')
 ```
 
-For more information and using the _recurly_ object refer to Recurly.js docs: https://docs.recurly.com/js/#how-it-works
+#### getBankInfo()
+`getBankInfo()` looks up additional bank information based from a given routing number. Accepts __routingNumber__ as an argument. Returns an __Ember.RSVP.Promise__ which is either resolved with __bankInfo__ containing bank information or is rejected with __err__ which explains why bank info request failed.
+It is used like this:
+```
+var routingNumber = '1234567';
+
+this.get('recurly').getBankInfo(routingNumber).then(function(bankInfo) {
+  // do anything bankInfo here
+});
+```
+Example of bank information returned:
+```
+{
+  bank_name: 'BANK OF RECURLY'
+}
+```
+
+For more information and using the `recurly` object refer to Recurly.js docs: https://docs.recurly.com/js/#how-it-works
 
 #TODO
 * recurly.pricing API
 * recurly.paypal API
-* recurly.bankAccount API 
+* Write tests
 
 ## Running Tests
 
