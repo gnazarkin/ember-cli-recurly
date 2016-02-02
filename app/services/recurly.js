@@ -33,5 +33,19 @@ export default (Ember.Service || Ember.Object).extend({
         }
       });
     });
+  },
+
+  payPal: function(opts) {
+    let self = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      recurly.paypal(opts, function(err, token) {
+        if(err) {
+          reject(err);
+        } else {
+          self.set('token', token);
+          resolve(token);
+        }
+      });
+    });
   }
 });

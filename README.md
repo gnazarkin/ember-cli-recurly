@@ -30,7 +30,7 @@ recurly: Ember.inject.service()
 Service injection gives access to a global object `recurly`. Can Also be used to obtain a token using the service.
 
 #### getToken()
-`getToken()` gets user location from the browser and writes its coordinates to `token` property on the service. Accepts __billingInfo__ as an argument. Returns an __Ember.RSVP.Promise__ which is either resolved with __token__ containing token object or with __err__ which explains why token request failed.
+`getToken()` makes a request to Recurly to retrieve a token using the passed in options `token` property on the service. Accepts __billingInfo__ as an argument. Returns an __Ember.RSVP.Promise__ which is either resolved with __token__ containing token object or with __err__ which explains why token request failed.
 It is used like this:
 ```
 var billingInfo = {
@@ -64,6 +64,17 @@ this.get('recurly').getToken(billingInfo).then(function(token) {
 The object is also held in the service and can be retrieved like so:
 ```
 let token = this.get('recurly.token')
+```
+
+#### payPal()
+`payPal()` initiates a PayPal checkout with recurly. Accepts __opts__ as options for the PayPal agreement flow. Returns an __Ember.RSVP.Promise__ which is either resolved with __token__ containing the token or with __err__ which explains why the PayPal request failed. If request is successful the token attribute in the service will also be updated. For more information on how to configure PayPal with Recurly refer to Recurly documentation: https://docs.recurly.com/payment-gateways/paypal-payments
+It is used like this:
+```
+let opts = { descriptions: 'Bazooka Monthly' };
+
+this.get('recurly').payPal(opts).then(function(token) {
+  // do anything with token here
+  })
 ```
 
 #### getBankInfo()
