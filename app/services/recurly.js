@@ -1,5 +1,3 @@
-import config from '../config/environment';
-import injectScript from 'ember-inject-script';
 import Ember from 'ember';
 
 export default (Ember.Service || Ember.Object).extend({

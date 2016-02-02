@@ -1,4 +1,5 @@
 # ember-cli-recurly
+[![npm version](https://badge.fury.io/js/ember-cli-recurly.svg)](http://badge.fury.io/js/ember-cli-recurly.svg)
 
 This addon is a solution for integrating Recurly.js into your Ember.js web app.
 
@@ -98,7 +99,6 @@ For more information and using the `recurly` object refer to Recurly.js docs: ht
 
 #TODO
 * recurly.pricing API
-* recurly.paypal API
 * Write tests
 
 ## Running Tests
