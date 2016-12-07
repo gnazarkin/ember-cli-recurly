@@ -45,5 +45,58 @@ export default (Ember.Service || Ember.Object).extend({
         }
       });
     });
+  },
+
+  getPricing: function(
+    plan,
+    planQuantity,
+    currency,
+    addons,
+    coupon,
+    giftCard,
+    country,
+    postalCode,
+    taxCode,
+    vatNumber
+    ){
+
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+
+      let pricing = recurly.Pricing()
+
+      pricing = pricing
+        .plan(plan, planQuantity)
+        .currency(currency)
+
+      addons.forEach(function (addon) {
+        pricing.addon(addon.name, { quantity: addon.quantity });
+      });
+
+      if (coupon != null) {
+        pricing.coupon(coupon);
+      }
+
+      if (giftCard != null) {
+        pricing.giftcard(giftCard);
+      }
+
+      pricing
+        .address({
+          country: country,
+          postal_code: postalCode
+        })
+        .tax({
+          tax_code: taxCode,
+          vat_number: vatNumber
+        })
+        .catch(function(err){
+          reject(err);
+        })
+        .done(function(price){
+          resolve(price)
+        })
+
+        return pricing;
+      })
   }
 });
