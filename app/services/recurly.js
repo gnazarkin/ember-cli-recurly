@@ -70,15 +70,20 @@ export default (Ember.Service || Ember.Object).extend({
         pricing.giftcard(options.giftCard);
       }
 
-      pricing
-        .address({
-          country: country,
-          postal_code: postalCode
-        })
-        .tax({
-          tax_code: taxCode,
-          vat_number: vatNumber
-        })
+      if (options.country && options.postalCode) {
+        pricing.address({
+          country: options.country,
+          postal_code: options.postalCode
+        });
+
+      }
+
+      if (options.taxCode || options.vatNumber) {
+        pricing.tax({
+          tax_code: options.taxCode,
+          vat_number: options.vatNumber
+        });
+      }
 
       return pricing
         .catch(function(err){
