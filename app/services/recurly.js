@@ -47,56 +47,51 @@ export default (Ember.Service || Ember.Object).extend({
     });
   },
 
-  getPricing: function(
-    plan,
-    planQuantity,
-    currency,
-    addons,
-    coupon,
-    giftCard,
-    country,
-    postalCode,
-    taxCode,
-    vatNumber
-    ){
-
+  /* Valid options are: plan, planQuantity, currency, addons,
+   * coupon, giftCard, country, postalCode, taxCode, vatNumber.
+   * See https://dev.recurly.com/docs/pricing#section-input-elements
+   * for more details.
+   */
+  getPricing: function(options) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
-
       let pricing = recurly.Pricing()
+        .plan(options.plan, options.planQuantity)
+        .currency(options.currency)
 
-      pricing = pricing
-        .plan(plan, planQuantity)
-        .currency(currency)
-
-      addons.forEach(function (addon) {
+      options.addons.forEach(function (addon) {
         pricing.addon(addon.name, { quantity: addon.quantity });
       });
 
-      if (coupon != null) {
-        pricing.coupon(coupon);
+      if (options.coupon) {
+        pricing.coupon(options.coupon);
       }
 
-      if (giftCard != null) {
-        pricing.giftcard(giftCard);
+      if (options.giftCard) {
+        pricing.giftcard(options.giftCard);
       }
 
-      pricing
-        .address({
-          country: country,
-          postal_code: postalCode
-        })
-        .tax({
-          tax_code: taxCode,
-          vat_number: vatNumber
-        })
+      if (options.country || options.postalCode) {
+        pricing.address({
+          country: options.country,
+          postal_code: options.postalCode
+        });
+
+      }
+
+      if (options.taxCode || options.vatNumber) {
+        pricing.tax({
+          tax_code: options.taxCode,
+          vat_number: options.vatNumber
+        });
+      }
+
+      return pricing
         .catch(function(err){
           reject(err);
         })
         .done(function(price){
           resolve(price)
-        })
-
-        return pricing;
-      })
+        });
+    });
   }
 });
