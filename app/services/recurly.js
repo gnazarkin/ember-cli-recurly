@@ -70,7 +70,7 @@ export default (Ember.Service || Ember.Object).extend({
         pricing.giftcard(options.giftCard);
       }
 
-      if (options.country && options.postalCode) {
+      if (options.country || options.postalCode) {
         pricing.address({
           country: options.country,
           postal_code: options.postalCode
