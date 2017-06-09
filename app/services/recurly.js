@@ -34,16 +34,11 @@ export default (Ember.Service || Ember.Object).extend({
   },
 
   payPal: function(opts) {
-    let self = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      recurly.paypal(opts, function(err, token) {
-        if(err) {
-          reject(err);
-        } else {
-          self.set('token', token);
-          resolve(token);
-        }
-      });
+      const paypal = recurly.PayPal();
+      paypal.on('token', resolve);
+      paypal.on('error', reject);
+      paypal.start();
     });
   },
 
@@ -93,5 +88,34 @@ export default (Ember.Service || Ember.Object).extend({
           resolve(price)
         });
     });
+  },
+
+  on: function(event, callback) {
+    recurly.on(event, callback);
+  },
+
+  off: function(event) {
+    recurly.off(event);
+  },
+
+  parent: function() {
+    recurly.parent();
+  },
+
+  config: {
+    fields: Ember.computed({
+      get() {
+        return recurly.config.fields;
+      },
+
+      set(key, value) {
+        Object.keys(value).forEach((key) => {
+          recurly.config.fields[key] = Object.assign(
+            recurly.config.fields[key], value[key]
+          );
+        });
+        return recurly.config.fields;
+      }
+    })
   }
 });
