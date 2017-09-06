@@ -33,12 +33,16 @@ export default (Ember.Service || Ember.Object).extend({
     });
   },
 
-  payPal: function(opts) {
+  /* Valid options are: braintree and description.
+   * See https://dev.recurly.com/docs/paypal#section-recurlypaypal
+   * for more details.
+   */
+  payPal: function(options) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      const paypal = recurly.PayPal();
+      const paypal = recurly.PayPal(options);
       paypal.on('token', resolve);
       paypal.on('error', reject);
-      paypal.start();
+      paypal.start(options);
     });
   },
 
