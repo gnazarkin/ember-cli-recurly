@@ -42,6 +42,7 @@ export default (Ember.Service || Ember.Object).extend({
       const paypal = recurly.PayPal(options);
       paypal.on('token', resolve);
       paypal.on('error', reject);
+      paypal.on('cancel', reject);
       paypal.start(options);
     });
   },
