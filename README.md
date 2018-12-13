@@ -1,15 +1,19 @@
-# ember-cli-recurly
-[![npm version](https://badge.fury.io/js/ember-cli-recurly.svg)](http://badge.fury.io/js/ember-cli-recurly.svg)
+ember-cli-recurly
+==============================================================================
 
 This addon is a solution for integrating Recurly.js into your Ember.js web app.
 
-## Installation
+Installation
+------------------------------------------------------------------------------
 
 ```
 ember install ember-cli-recurly
 ```
 
-## Usage
+
+Usage
+------------------------------------------------------------------------------
+
 * Create Recurly account: https://recurly.com/
 * Define your Recurly public key in config.
 ```
@@ -101,13 +105,35 @@ For more information and using the `recurly` object refer to Recurly.js docs: ht
 * recurly.pricing API
 * Write tests
 
-## Running Tests
 
-* `ember test`
-* `ember test --server`
+Contributing
+------------------------------------------------------------------------------
 
-## Building
+### Installation
 
-* `ember build`
+* `git clone https://github.com/Marketcircle/ember-cli-recurly.git`
+* `cd ember-cli-recurly`
+* `npm install`
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+### Linting
+
+* `npm run lint:js`
+* `npm run lint:js -- --fix`
+
+### Running tests
+
+* `ember test` – Runs the test suite on the current Ember version
+* `ember test --server` – Runs the test suite in "watch mode"
+* `npm test` – Runs `ember try:each` to test your addon against multiple Ember versions
+
+### Running the dummy application
+
+* `ember serve`
+* Visit the dummy application at [http://localhost:4200](http://localhost:4200).
+
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+
+License
+------------------------------------------------------------------------------
+
+This project is licensed under the [MIT License](LICENSE.md).

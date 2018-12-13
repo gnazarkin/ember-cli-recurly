@@ -1,5 +1,4 @@
 import config from '../config/environment';
-import injectScript from 'ember-inject-script';
 
 export function initialize(container, application) {
   if(!config.recurly.publicKey) {
