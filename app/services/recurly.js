@@ -107,20 +107,5 @@ export default (Ember.Service || Ember.Object).extend({
     recurly.parent();
   },
 
-  config: {
-    fields: Ember.computed({
-      get() {
-        return recurly.config.fields;
-      },
-
-      set(key, value) {
-        Object.keys(value).forEach((key) => {
-          recurly.config.fields[key] = Object.assign(
-            recurly.config.fields[key], value[key]
-          );
-        });
-        return recurly.config.fields;
-      }
-    })
-  }
+  config: Ember.computed(() => recurly.config)
 });
