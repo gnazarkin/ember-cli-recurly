@@ -1,9 +1,9 @@
+import EmberError from '@ember/error';
 import config from '../config/environment';
-import injectScript from 'ember-inject-script';
 
-export function initialize(container, application) {
+export function initialize() {
   if(!config.recurly.publicKey) {
-    throw new Ember.Error('RecurlyService: Missing Recurly key, please set `ENV.recurly.publicKey` in config.environment.js');
+    throw new EmberError('RecurlyService: Missing Recurly key, please set `ENV.recurly.publicKey` in config.environment.js');
   }
 
   if (window.recurly) {
