@@ -1,6 +1,6 @@
 {
-  "name": "ember-cli-recurly",
-  "version": "0.0.7",
+  "name": "@marketcircle/ember-cli-recurly",
+  "version": "0.0.8",
   "description": "Ember-cli addon for using Recurly.js",
   "keywords": [
     "ember-addon"
